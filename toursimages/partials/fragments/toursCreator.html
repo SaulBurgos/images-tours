@@ -1,0 +1,66 @@
+﻿
+
+<div id="toursCreator">
+	<div class="toursCreator-panel toursCreator-panel-1">
+	
+		<form id="formAddHotspots" role="form" name="formTypeArea">
+			<div class="form-group">
+				<label>Select Clickable areas</label>
+				<select class="form-control" name="typeArea" ng-model="typeAreaSelected">
+					<option value="anchor">Anchor</option>
+					<option value="action">Action</option>
+				</select>
+			</div>
+			<button type="button" class="btn btn-default heritageButton" ng-click="addHotspot()">
+				Add area
+			</button>
+		</form>
+
+
+		<ul class="list-unstyled" id="toursCreator-listHotspots">
+	  		<li ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-listHotspots-{{hotspot.type}}">
+		  		<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-name">
+		  			{{ $index + 1 }}
+		  			<button type="button" class="btn btn-default btn-sm" ng-click="removeHotspot($index)">
+					  <span class="glyphicon glyphicon-trash"></span>
+					</button>					
+		  		</div>
+		  		<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-select" ng-show="hotspot.type=='anchor'">
+		  			<select class="form-control" name="scene" ng-model="hotspot.targetAnchor" 
+		  			ng-options="h.name for h in scenes | filter:{ url : 'http' }" >
+		  			</select>
+		  		</div>
+		  		<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-preview" ng-show="hotspot.type=='anchor'">
+		  			<img ng-src="{{hotspot.targetAnchor.url}}" alt="" ng-show="hotspot.type=='anchor'">
+		  			<img ng-src="{{hotspot.targetStation.image}}" alt="" ng-show="hotspot.type=='action'">
+		  		</div>
+	  		</li>
+		</ul>
+		
+	</div>
+	<div class="toursCreator-panel toursCreator-panel-2">
+		<form role="form" name="formChangeScenes">
+			<div class="form-group">
+				<label>Select Scenes</label>
+				<select class="form-control" name="scene" ng-model="currentScene" ng-options="h.name for h in scenes | filter:{ url : 'http' }"></select>
+			</div>	
+		</form>
+
+		<div class="toursCreator-arrange">
+			<!-- <img class="toursCreator-image" ng-src="{{currentScene.url}}" alt="Image" /> -->
+			<img class="toursCreator-image" src="" alt="Image" />
+			<div ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-hotspot ui-widget-content toursCreator-hotspot-{{ hotspot.type }}" 
+			ng-style="hotspot.position" data-id="{{ hotspot.id }}" ng-init="setUpHotspot(hotspot);">
+				<span class="tours-index">{{ $index + 1 }}</span>
+			</div>
+
+			<img id="loadingScene" src="img/ajax-loader.gif"  ng-show="loadingScene">
+		</div>
+		
+	</div>
+</div>
+
+
+
+
+

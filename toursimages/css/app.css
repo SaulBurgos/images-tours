@@ -1,0 +1,219 @@
+* {
+  box-sizing: border-box;
+}
+
+.guideLine {
+  border: 1px dashed red;
+}
+
+#listScenes {
+  max-height: 350px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+#toursCreator {
+  /* border: 1px solid red; */
+  height: 350px;
+}
+#toursCreator #formAddHotspots {
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: #A9A9A9;
+}
+#toursCreator .tours-index {
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.8em;
+}
+#toursCreator .toursCreator-arrange {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  vertical-align: top;
+  margin: 0 auto;
+}
+#toursCreator .toursCreator-arrange #loadingScene {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+#toursCreator .toursCreator-rightPanel {
+  display: none;
+}
+#toursCreator .toursCreator-image {
+  height: 100%;
+  max-width: 100%;
+}
+#toursCreator .toursCreator-hotspot {
+  position: absolute;
+  border-radius: 6px;
+  min-width: 50px;
+  min-height: 50px;
+  opacity: 0.7;
+}
+#toursCreator .toursCreator-hotspot:hover {
+  cursor: move;
+}
+#toursCreator .toursCreator-hotspot-anchor {
+  background: #cc0000;
+  border: solid 1px #990000;
+}
+#toursCreator .toursCreator-hotspot-action {
+  background: #003094;
+  border: solid 1px #003094;
+}
+#toursCreator .ui-icon-gripsmall-diagonal-se {
+  width: 20px;
+  height: 20px;
+  background-image: none;
+  background-size: contain;
+  background-position: 100%;
+  background-image: url('../img/resize.png');
+}
+#toursCreator .toursCreator-panel {
+  float: left;
+  width: 50%;
+  padding: 6px;
+}
+#toursCreator .toursCreator-panel-1 {
+  width: 40%;
+}
+#toursCreator .toursCreator-panel-2 {
+  width: 60%;
+}
+#toursCreator #toursCreator-listHotspots {
+  max-height: 350px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+#toursCreator #toursCreator-listHotspots li {
+  border: 1px solid gray;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 4px;
+  margin-bottom: 4px;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-sections {
+  display: inline-block;
+  width: 32%;
+  height: 60px;
+  vertical-align: top;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-name {
+  word-break: break-all;
+  overflow: hidden;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 5px;
+  width: 15%;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-select {
+  padding-top: 12px;
+  width: 45%;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-preview {
+  width: 38%;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-preview img {
+  height: 100%;
+  width: 100%;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-action {
+  background-color: #003094;
+}
+#toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-anchor {
+  background-color: #cc0000;
+}
+
+
+.tourArea {
+  position: absolute;
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+.tourArea .heritageIcon-ok {
+  position: absolute;
+  top: -15px;
+  margin: auto;
+  left: 0px;
+  right: 0px;
+}
+.tourArea .tourArea-itemName {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.tourArea-action {
+  background-image: url('../img/pointer.png');
+}
+.tourArea-anchor {
+  background-image: url('../img/zone.png');
+}
+.tourArea-done {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+.tourArea-clue {
+  box-shadow: 0px 0px 6px 10px white;
+  -webkit-box-shadow: 0px 0px 6px 10px white;
+  -moz-box-shadow: 0px 0px 6px 10px white;
+  -ms-box-shadow: 0px 0px 6px 10px white;
+  background-color: rgba(255, 255, 255, 0.56);
+  -webkit-transition: all 0.5s linear;
+  /* For Safari 3.1 to 6.0 */
+  -ms-transition: all 0.5s linear;
+  /* For Safari 3.1 to 6.0 */
+  -moz-transition: all 0.5s linear;
+  /* For Safari 3.1 to 6.0 */
+  transition: all 0.5s linear;
+  /* For Safari 3.1 to 6.0 */
+}
+.tourArea-backButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  height: 45px;
+  width: 55px;
+  font-size: 30px;
+  line-height: 1;
+}
+.toursModalProgress .toursModalProgress-containerImg {
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background-color: #252525;
+  border: 2px solid #948c8c;
+}
+.toursModalProgress .toursModalProgress-containerImg img {
+  height: 100%;
+  width: 100%;
+}
+
+#tourImages {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-transition: background-image 0.8s;
+  -moz-transition: background-image 0.8s;
+  -o-transition: background-image 0.8s;
+  transition: background-image 0.8s;
+}

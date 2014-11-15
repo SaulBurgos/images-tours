@@ -1,0 +1,17 @@
+<div id="tourImages">
+	<div id="{{ hotspot.id }}" class="tourArea" ng-repeat="hotspot in actualScene.hotspots track by $index" ng-style="hotspot.position"
+	 ng-click="clickOnArea(hotspot,$index);" data-sceneid="{{actualScene.id}}" 
+	 ng-class="{'tourArea-done': hotspot.isAnswered,'tourArea-action': hotspot.type== 'action' ,'tourArea-anchor': hotspot.type== 'anchor','tourArea-clue':hotspot.clue}">
+	 	<div ng-show="hotspot.isAnswered" class="tourArea-itemName text-center">
+			{{ hotspot.nameSta }}
+		</div>
+		<span class="heritageIcon heritageIcon-ok" ng-show="hotspot.isAnswered"></span>
+	</div>
+
+	<div class="btn btn-info btn-sm tourArea-backButton" ng-click="backPreviousScene()" ng-show="tourReady">
+		<span class="glyphicon glyphicon-arrow-left"></span>
+	</div>
+</div>
+
+
+	

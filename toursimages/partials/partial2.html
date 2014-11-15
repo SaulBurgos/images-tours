@@ -1,0 +1,18 @@
+<div id="tourContainer">
+	<tours-areas scenes="tourToLoad" callbacknewscene="sceneChanged" 
+		callbackaction="clickOnAction"></tours-areas>
+</div>
+<div class="row">
+	Current Scene: <b>{{ currentScene.name }}</b><br>
+	Hotspot Clicked: <b>{{ hotspotClicked.name }}</b><br>
+	<a href="#/view1" class="btn btn-default " role="button">
+		Back to creator
+	</a>
+</div>
+<style>
+	#tourContainer {
+		width: 1000px;
+		height: 500px;
+		border: 1px solid gray;
+	}
+</style>
