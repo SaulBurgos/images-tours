@@ -3,7 +3,9 @@ Images Tour Example
 
 Example using 2 directives to create a tour based on images.
 
-Here is the [demo](http://saulburgos.com/apps/toursimages/)
+Creator tour demo [demo](http://saulburgos.com/apps/toursimages/) 
+
+Tour demo [here](http://saulburgos.com/apps/toursimages/#/view2)
 
 Here directives are:  "toursCreator" , "toursAreas" in the file called: "tourModule.js".
 
