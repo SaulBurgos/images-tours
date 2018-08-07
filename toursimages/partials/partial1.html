@@ -1,38 +1,63 @@
-
-<div class="panel panel-default">
-  <div class="panel-body">
-		<form role="form" name="formAnimatedTours">						
-			<div class="col-xs-12">
-				<div class="form-group heritageInput">
-					<label>Enter how many backgrounds there would be</label>
-					<input type="number" class="form-control" ng-model="amountScenes" min="2" step="1" 
-					ng-change="updateScenesToUse()">
-				</div>
-			</div>
-
-			<div id="listScenes" class="col-xs-12">
-				<div ng-repeat="itemScenes in scenes track by $index">
-					<div class="form-group heritageInput">
-						<label>Scene {{ $index + 1 }}</label>
-						<input type="text" class="form-control" ng-model="scenes[$index].url" placeholder="url image"/>
-						<img ng-src="{{scenes[$index].url}}"  class="img-thumbnail" style="height:50px;" 
-						ng-show="wizard.animatedGameFormData.scenes[$index].url!=''">
-					</div>
-				</div>		
-			</div>	
-			
-		</form>
+<div class="row">
+	<div class="col-xs-12 text-center">
+		<h1>
+			Tour image creator
+		</h1>		
 	</div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default" ng-if="steps.step1.show">
+  <div class="panel-body">
+
+		<div class="col-xs-12">
+			<div class="form-group">
+				<h3>Step 1 - Select your images</h3>
+			</div>
+		</div>
+	
+		<div class="col-xs-12">
+			<div class="form-group">
+				<input type="file" class="form-control">
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="form-group">
+				<a type="button" class="btn btn-default">Next</a>
+			</div>
+		</div>
+
+		<!-- <div class="col-xs-12">
+			<div class="form-group heritageInput">
+				<label>Enter how many backgrounds there would be</label>
+				<input type="number" class="form-control" ng-model="amountScenes" min="2" step="1" 
+				ng-change="updateScenesToUse()">
+			</div>
+		</div>
+
+		<div id="listScenes" class="col-xs-12">
+			<div ng-repeat="itemScenes in scenes track by $index">
+				<div class="form-group heritageInput">
+					<label>Scene {{ $index + 1 }}</label>
+					<input type="text" class="form-control" ng-model="scenes[$index].url" placeholder="url image"/>
+					<img ng-src="{{scenes[$index].url}}"  class="img-thumbnail" style="height:50px;" 
+					ng-show="wizard.animatedGameFormData.scenes[$index].url!=''">
+				</div>
+			</div>		
+		</div> -->
+
+	</div>
+</div>
+
+<div class="panel panel-default" ng-if="steps.step2.show">
 	<div class="panel-body">
  		<h3 class="missionWizard-title">Assign station to clickable areas</h3>
 		<tours-creator scenes="scenes">
 		</tours-creator>	
 	</div>
 </div>
-<div class="panel panel-default">
+
+<div class="panel panel-default" ng-if="steps.step3.show">
 	<div class="panel-body">
 		<div>
  			<h3 class="missionWizard-title">Object Generated</h3>
