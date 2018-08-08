@@ -217,3 +217,13 @@
   -o-transition: background-image 0.8s;
   transition: background-image 0.8s;
 }
+
+.imageTourPreviewThumb {
+	width: 150px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.imagePreviewContainer {
+	text-align: center;
+}

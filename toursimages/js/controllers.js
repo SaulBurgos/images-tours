@@ -4,7 +4,7 @@
 
 angular.module('myApp.controllers', [])
 
-.controller('MyCtrl1', function($scope) {
+.controller('MyCtrl1', ['$scope','$q',function($scope,$q) {
 
 	$scope.amountScenes = 8;
 	$scope.steps = {
@@ -19,22 +19,71 @@ angular.module('myApp.controllers', [])
 		}
 	};
 
-	$scope.scenes = [
-		{name: 'scene 1',url:'http://saulburgos.com/apps/toursimages/img/tours-1.jpg'},
-		{name: 'scene 2',url:'http://saulburgos.com/apps/toursimages/img/tours-2.jpg'},
-		{name: 'scene 3',url:'http://saulburgos.com/apps/toursimages/img/tours-3.jpg'},
-		{name: 'scene 4',url:'http://saulburgos.com/apps/toursimages/img/tours-4.jpg'},
-		{name: 'scene 5',url:'http://saulburgos.com/apps/toursimages/img/tours-5.jpg'},
-		{name: 'scene 6',url:'http://saulburgos.com/apps/toursimages/img/tours-6.jpg'},
-		{name: 'scene 7',url:'http://saulburgos.com/apps/toursimages/img/tours-7.jpg'},
-		{name: 'scene 8',url:'http://saulburgos.com/apps/toursimages/img/tours-8.jpg'},
-		{name: 'scene 9',url:'http://saulburgos.com/apps/toursimages/img/tours-9.jpg'}
-	];
+	$scope.scenes = [];
+
+	// $scope.scenes = [
+	// 	{name: 'scene 1',url:'http://saulburgos.com/apps/toursimages/img/tours-1.jpg'},
+	// 	{name: 'scene 2',url:'http://saulburgos.com/apps/toursimages/img/tours-2.jpg'},
+	// 	{name: 'scene 3',url:'http://saulburgos.com/apps/toursimages/img/tours-3.jpg'},
+	// 	{name: 'scene 4',url:'http://saulburgos.com/apps/toursimages/img/tours-4.jpg'},
+	// 	{name: 'scene 5',url:'http://saulburgos.com/apps/toursimages/img/tours-5.jpg'},
+	// 	{name: 'scene 6',url:'http://saulburgos.com/apps/toursimages/img/tours-6.jpg'},
+	// 	{name: 'scene 7',url:'http://saulburgos.com/apps/toursimages/img/tours-7.jpg'},
+	// 	{name: 'scene 8',url:'http://saulburgos.com/apps/toursimages/img/tours-8.jpg'},
+	// 	{name: 'scene 9',url:'http://saulburgos.com/apps/toursimages/img/tours-9.jpg'}
+	// ];
 
 
 	$scope.showJson = function() {
 		$scope.finalObject = angular.toJson($scope.scenes);
 	};	
+
+	function readImageFile (file) {
+		var defer = $q.defer();
+		var fileReader = new FileReader();
+
+		fileReader.onload = function(fileLoadedEvent) {
+			var img = new Image();
+			img.crossOrigin = 'Anonymous';
+			img.className = 'imageTourPreviewThumb img-responsive img-thumbnail';
+			img.onload = function() {               
+				defer.resolve({
+					image: this,
+					data: fileReader.result
+				});
+			};
+			img.src = fileReader.result;
+		};
+
+		//fileReader.onprogress = function(event) {};
+
+		fileReader.readAsDataURL(file);
+		return defer.promise;
+	}
+
+	$scope.processFiles = function() {
+		var imagesPromises = [];
+		var filesSelected = document.getElementById("imagesTour").files;
+
+      if (filesSelected.length > 0) {
+
+			_.each(filesSelected,function(currentFile) {
+
+				imagesPromises.push(readImageFile(currentFile));
+			});
+		}
+
+		$q.all(imagesPromises).then(function(info) {
+			
+			info.forEach(function(element,index) {
+				document.querySelector('.imagePreviewContainer').appendChild(element.image);
+				$scope.scenes.push({
+					name: index + 1,
+					image: element.image
+				});
+			});			
+		});
+	};
 
 	//only to update the array of scenes
 	$scope.updateScenesToUse =  function() {
@@ -49,7 +98,7 @@ angular.module('myApp.controllers', [])
    	
 	});
 
-})
+}])
 
 .controller('MyCtrl2', function($scope) {
 
