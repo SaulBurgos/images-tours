@@ -21,6 +21,29 @@ angular.module('myApp.controllers', [])
 
 	$scope.scenes = [];
 
+	$scope.goToStep = function(stepToGo) {
+
+		switch (stepToGo) {
+			case 1:
+				$scope.steps.step1.show = true;
+				$scope.steps.step2.show = false;
+				$scope.steps.step2.show = false;
+				break;
+			case 2:
+				$scope.steps.step1.show = false;
+				$scope.steps.step2.show = true;
+				$scope.steps.step2.show = true;
+				break;
+
+			case 3:
+				$scope.steps.step1.show = false;
+				$scope.steps.step2.show = true;
+				$scope.steps.step2.show = true;
+				break;
+		}
+
+	};
+
 	// $scope.scenes = [
 	// 	{name: 'scene 1',url:'http://saulburgos.com/apps/toursimages/img/tours-1.jpg'},
 	// 	{name: 'scene 2',url:'http://saulburgos.com/apps/toursimages/img/tours-2.jpg'},
@@ -42,6 +65,8 @@ angular.module('myApp.controllers', [])
 		var defer = $q.defer();
 		var fileReader = new FileReader();
 
+		jQuery('#msgLoadingImages').append('<div> Loading... ' + file.name + '</div>' );
+
 		fileReader.onload = function(fileLoadedEvent) {
 			var img = new Image();
 			img.crossOrigin = 'Anonymous';
@@ -55,7 +80,7 @@ angular.module('myApp.controllers', [])
 			img.src = fileReader.result;
 		};
 
-		//fileReader.onprogress = function(event) {};
+		fileReader.onprogress = function(event) {};
 
 		fileReader.readAsDataURL(file);
 		return defer.promise;
@@ -74,12 +99,15 @@ angular.module('myApp.controllers', [])
 		}
 
 		$q.all(imagesPromises).then(function(info) {
+			$scope.scenes = [];
+			jQuery('#msgLoadingImages').empty();
 			
 			info.forEach(function(element,index) {
 				document.querySelector('.imagePreviewContainer').appendChild(element.image);
 				$scope.scenes.push({
 					name: index + 1,
-					image: element.image
+					image: element.image,
+					url: element.data
 				});
 			});			
 		});

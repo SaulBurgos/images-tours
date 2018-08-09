@@ -24,13 +24,12 @@
 
 		<div class="col-xs-12">
 			<div class="form-group">
-				<a type="button" class="btn btn-default">Next</a>
+				<a type="button" class="btn btn-default" ng-click="goToStep(2);">Next</a>
 			</div>
 		</div>
 
-		<div class="imagePreviewContainer col-xs-12">
-
-		</div>
+		<div id="msgLoadingImages"></div>
+		<div class="imagePreviewContainer col-xs-12"></div>
 
 		<!-- <div class="col-xs-12">
 			<div class="form-group heritageInput">
@@ -56,6 +55,13 @@
 
 <div class="panel panel-default" ng-if="steps.step2.show">
 	<div class="panel-body">
+		
+		<div class="col-xs-12">
+			<div class="form-group">
+				<a type="button" class="btn btn-default" ng-click="goToStep(1);">Back Step 1</a>
+			</div>
+		</div>
+
  		<h3 class="missionWizard-title">Assign station to clickable areas</h3>
 		<tours-creator scenes="scenes">
 		</tours-creator>	
