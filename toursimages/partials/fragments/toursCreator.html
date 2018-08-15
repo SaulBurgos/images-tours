@@ -61,8 +61,9 @@
 		<div class="toursCreator-containerArrange">
 
 			<div class="toursCreator-arrange">
-				<!-- <img class="toursCreator-image" ng-src="{{currentScene.url}}" alt="Image" /> -->
+				
 				<img class="toursCreator-image" src="" alt="Image" />
+				
 				<div ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-hotspot ui-widget-content toursCreator-hotspot-{{ hotspot.type }}" 
 				ng-style="hotspot.position" data-id="{{ hotspot.id }}" ng-init="setUpHotspot(hotspot);">					
 					<div class="toursCreator-hotspot-inner"></div>

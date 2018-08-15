@@ -17,6 +17,7 @@ angular.module('toursModule', [])
 			scope.typeAreaSelected = '';
 			scope.currentScene = {};
 			scope.loadingScene = false;
+			var imageSceneSelector = '.toursCreator-image';
 
 			scope.init = function () {
 			   var jquiScript = document.createElement('script');
@@ -41,18 +42,74 @@ angular.module('toursModule', [])
 					if(typeof scope.currentScene.url != 'undefined') {
 						scope.loadingScene = true;
 					}
-					
-					sceneBackground.load(function() {
-						scope.loadingScene = false;
-						parent.css('height',jQuery(this).css('height'));
-						parent.css('width',jQuery(this).css('width'));
-						scope.$digest();
-					}).error(function() {
+				
+					jQuery('.toursCreator-arrange').css({
+            		'height': '100%',
+            		'width': '100%'
+					});
+					  
+					jQuery(imageSceneSelector).removeClass('responsiveImage--portrait responsiveImage--landscape');
+            	jQuery(imageSceneSelector).load(scope.loadImageSuccess).error(function() {
 					   sceneBackground.attr('src','http://placehold.it/200x200&text=No+Image');
-				  	}).attr('src',newValue);
+					}).attr('src', newValue);
+
+
+					// sceneBackground.load(function() {
+						
+					// 	scope.loadingScene = false;
+					// 	parent.css('height',jQuery(this).css('height'));
+					// 	parent.css('width',jQuery(this).css('width'));
+					// 	scope.$digest();
+
+					// }).error(function() {
+					//    sceneBackground.attr('src','http://placehold.it/200x200&text=No+Image');
+					// }).attr('src',newValue);
 
 				});
 			};
+
+			scope.loadImageSuccess = _.debounce(function () {
+				
+				scope.loadingScene = false;
+				var height = jQuery(imageSceneSelector).height();
+				var width = jQuery(imageSceneSelector).width();
+				
+				// $timeout(function() {
+				// 	scope.currentScene.setImageSize({
+				// 		height: height,
+				// 		width: width
+				// 	});
+				// });
+
+				if (width > height) {
+					//it's a landscape
+					jQuery(imageSceneSelector).addClass('responsiveImage--landscape');
+					jQuery(imageSceneSelector).removeClass('responsiveImage--portrait');
+
+					//prevent error in some image
+					if (jQuery(imageSceneSelector).parent().outerHeight() < height) {
+						jQuery(imageSceneSelector).removeClass('responsiveImage--landscape');
+						jQuery(imageSceneSelector).addClass('responsiveImage--portrait');
+					}
+
+				} else if (width < height) {
+					//it's a portrait
+					jQuery(imageSceneSelector).addClass('responsiveImage--portrait');
+					jQuery(imageSceneSelector).removeClass('responsiveImage--landscape');
+				} else {
+					//image width and height are equal, therefore it is square.
+					jQuery(imageSceneSelector).addClass('responsiveImage--portrait');
+					jQuery(imageSceneSelector).removeClass('responsiveImage--landscape');
+				}           		
+
+				jQuery('.toursCreator-arrange').css({
+					'height': jQuery(imageSceneSelector).css('height'),
+					'width': jQuery(imageSceneSelector).css('width')
+				});
+
+				scope.$digest();
+
+			},1000);
 
 			scope.removeHotspot = function(index) {
 				scope.currentScene.hotspots.splice(index,1);

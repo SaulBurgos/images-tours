@@ -2,6 +2,12 @@
 
 /* Controllers */
 
+/**
+ * 
+ * https://codepen.io/agrayson/pen/vObLmZ
+ * https://codepen.io/Zhouzi/pen/OPxYEq
+ */
+
 angular.module('myApp.controllers', [])
 
 .controller('MyCtrl1', ['$scope','$q',function($scope,$q) {
