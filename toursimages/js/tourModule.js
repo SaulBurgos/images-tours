@@ -17,7 +17,7 @@ angular.module('toursModule', [])
 			scope.typeAreaSelected = '';
 			scope.currentScene = {};
 			scope.loadingScene = false;
-			var imageSceneSelector = '.toursCreator-image';
+			var imageSceneSelector = '.toursCreator-image';			
 
 			scope.init = function () {
 			   var jquiScript = document.createElement('script');
@@ -53,60 +53,35 @@ angular.module('toursModule', [])
 					   sceneBackground.attr('src','http://placehold.it/200x200&text=No+Image');
 					}).attr('src', newValue);
 
-
-					// sceneBackground.load(function() {
-						
-					// 	scope.loadingScene = false;
-					// 	parent.css('height',jQuery(this).css('height'));
-					// 	parent.css('width',jQuery(this).css('width'));
-					// 	scope.$digest();
-
-					// }).error(function() {
-					//    sceneBackground.attr('src','http://placehold.it/200x200&text=No+Image');
-					// }).attr('src',newValue);
-
 				});
 			};
 
-			scope.loadImageSuccess = _.debounce(function () {
-				
+			scope.loadImageSuccess = _.debounce(function () {				
 				scope.loadingScene = false;
 				var height = jQuery(imageSceneSelector).height();
 				var width = jQuery(imageSceneSelector).width();
-				
-				// $timeout(function() {
-				// 	scope.currentScene.setImageSize({
-				// 		height: height,
-				// 		width: width
-				// 	});
-				// });
+				var cssAspectRatio;
+				var ratio= width / height;
+				var pratio= jQuery('.toursCreator-arrange').width() / jQuery('.toursCreator-arrange').parent().height();
 
-				if (width > height) {
-					//it's a landscape
-					jQuery(imageSceneSelector).addClass('responsiveImage--landscape');
-					jQuery(imageSceneSelector).removeClass('responsiveImage--portrait');
-
-					//prevent error in some image
-					if (jQuery(imageSceneSelector).parent().outerHeight() < height) {
-						jQuery(imageSceneSelector).removeClass('responsiveImage--landscape');
-						jQuery(imageSceneSelector).addClass('responsiveImage--portrait');
-					}
-
-				} else if (width < height) {
-					//it's a portrait
-					jQuery(imageSceneSelector).addClass('responsiveImage--portrait');
-					jQuery(imageSceneSelector).removeClass('responsiveImage--landscape');
+				if (ratio<pratio) {
+					cssAspectRatio = {
+						width:'auto', 
+						height:'100%'
+					};
 				} else {
-					//image width and height are equal, therefore it is square.
-					jQuery(imageSceneSelector).addClass('responsiveImage--portrait');
-					jQuery(imageSceneSelector).removeClass('responsiveImage--landscape');
-				}           		
+					cssAspectRatio = { 
+						width:'100%', 
+						height:'auto'
+					};
+				} 
+
+				jQuery(imageSceneSelector).css(cssAspectRatio);
 
 				jQuery('.toursCreator-arrange').css({
 					'height': jQuery(imageSceneSelector).css('height'),
 					'width': jQuery(imageSceneSelector).css('width')
 				});
-
 				scope.$digest();
 
 			},1000);

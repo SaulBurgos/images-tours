@@ -29,14 +29,19 @@
   top: 0;
   font-size: 1.8em;
 }
-#toursCreator .toursCreator-arrange {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  vertical-align: top;
-  margin: 0 auto;
+#toursCreator .toursCreator-arrange {  	
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	vertical-align: top;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
+
 #toursCreator .toursCreator-arrange #loadingScene {
   position: absolute;
   top: 0;
@@ -45,10 +50,10 @@
   right: 0;
   margin: auto;
 }
+
 #toursCreator .toursCreator-rightPanel {
   display: none;
 }
-
 
 #toursCreator .toursCreator-hotspot {
   position: absolute;
@@ -264,6 +269,7 @@
 	height: 400px;
 	border: 1px solid gray;
 	margin: 0;
+	position: relative;
 }
 
 .truncateText {
