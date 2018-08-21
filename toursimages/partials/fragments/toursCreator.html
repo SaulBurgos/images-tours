@@ -65,22 +65,16 @@
 				<img class="toursCreator-image" src="" alt="Image" />
 				
 				<div ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-hotspot ui-widget-content toursCreator-hotspot-{{ hotspot.type }}" 
-				ng-style="hotspot.position" data-id="{{ hotspot.id }}" ng-init="setUpHotspot(hotspot);">					
+				ng-style="hotspot.position" data-id="{{ hotspot.id }}" ng-init="setUpHotspot(hotspot);">	
+
 					<div class="toursCreator-hotspot-inner"></div>
 					<span class="tours-index">{{ $index + 1 }}</span>
+
 				</div>
 	
 				<img id="loadingScene" src="img/ajax-loader.gif"  ng-show="loadingScene">
 			</div>
-
-		</div>
-
-		
-		
+		</div>		
 	</div>
+
 </div>
-
-
-
-
-
