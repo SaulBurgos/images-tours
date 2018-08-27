@@ -108,7 +108,8 @@ angular.module('toursModule', [])
 						name: _.uniqueId(scope.typeAreaSelected + '_'),
 						type: scope.typeAreaSelected,
 						targetAnchor: '',
-						position: scope.getRandomPosition()
+						position: scope.getRandomPosition(),
+						open: false						
 					});
 				}
 			};

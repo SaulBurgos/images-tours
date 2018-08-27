@@ -111,11 +111,13 @@
 #toursCreator .toursCreator-panel-2 {
   width: 70%;
 }
+
 #toursCreator #toursCreator-listHotspots {
   max-height: 350px;
   overflow: hidden;
   overflow-y: auto;
 }
+
 #toursCreator #toursCreator-listHotspots li {  
   background-color: rgba(0, 0, 0, 0.15);
   padding: 4px;
@@ -129,6 +131,7 @@
   height: 30px;
   vertical-align: top;
 }
+
 #toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-name {
   word-break: break-all;
   overflow: hidden;
@@ -136,6 +139,7 @@
   font-weight: bold;  
   width: 25%;
 }
+
 #toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-select {
   
   width: 45%;
@@ -159,6 +163,14 @@
 }
 
 #toursCreator #toursCreator-listHotspots .toursCreator-listHotspots-anchor {
+	background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+}
+
+.toursCreator-listHotspots-anchor >.panel-heading {
+	background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);
+}
+
+.toursCreator-listHotspots-action >.panel-heading {
 	background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
 }
 

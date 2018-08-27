@@ -25,8 +25,42 @@
 
 		</form>
 
+		
+		<accordion close-others="oneAtATime" class="toursCreator-listHotspots">
 
-		<ul class="list-unstyled" id="toursCreator-listHotspots">
+			<accordion-group is-open="hotspot.open" ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-listHotspots-{{hotspot.type}}">
+				<accordion-heading>
+					{{ $index + 1 }} - {{ hotspot.type }}
+					<i class="pull-right glyphicon" 
+					ng-class="{'glyphicon-chevron-down': hotspot.open, 'glyphicon-chevron-right': !hotspot.open}"></i>
+				</accordion-heading>
+				<div>
+
+					<div>
+
+						<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-select" ng-show="hotspot.type=='anchor'">
+							<select class="form-control" name="scene" ng-model="hotspot.targetAnchor" 
+							ng-options="h.name for h in scenes" >
+							</select>
+						</div>
+						<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-preview" ng-show="hotspot.type=='anchor'">
+							<img ng-src="{{hotspot.targetAnchor.url}}" alt="" ng-show="hotspot.type=='anchor'">
+							<img ng-src="{{hotspot.targetStation.image}}" alt="" ng-show="hotspot.type=='action'">
+						</div>
+
+					</div>
+
+					<div>
+						<button type="button" class="btn btn-danger btn-sm btn-block" ng-click="removeHotspot($index)">
+							<span class="glyphicon glyphicon-trash"></span> Remove
+						</button>
+					</div>					
+				</div>		 
+			</accordion-group>
+			
+		</accordion>
+
+		<!-- <ul class="list-unstyled" id="toursCreator-listHotspots">
 	  		<li ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-listHotspots-{{hotspot.type}}">
 		  		<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-name">
 		  			{{ $index + 1 }}
@@ -44,7 +78,7 @@
 		  			<img ng-src="{{hotspot.targetStation.image}}" alt="" ng-show="hotspot.type=='action'">
 		  		</div>
 	  		</li>
-		</ul>
+		</ul> -->
 		
 	</div>
 	<div class="toursCreator-panel toursCreator-panel-2">
