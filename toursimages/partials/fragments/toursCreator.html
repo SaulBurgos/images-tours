@@ -36,25 +36,30 @@
 				</accordion-heading>
 				<div>
 
-					<div>
+					<div class="text-center">
+						<label>
+							Id:
+						</label>
+						{{ hotspot.id }}
+					</div>
 
-						<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-select" ng-show="hotspot.type=='anchor'">
+					<div class="row" ng-show="hotspot.type=='anchor'">
+						<div class="col-xs-6" >								
 							<select class="form-control" name="scene" ng-model="hotspot.targetAnchor" 
 							ng-options="h.name for h in scenes" >
 							</select>
 						</div>
-						<div class="toursCreator-listHotspots-sections toursCreator-listHotspots-preview" ng-show="hotspot.type=='anchor'">
-							<img ng-src="{{hotspot.targetAnchor.url}}" alt="" ng-show="hotspot.type=='anchor'">
-							<img ng-src="{{hotspot.targetStation.image}}" alt="" ng-show="hotspot.type=='action'">
+						<div class="col-xs-6">	
+							<img ng-src="{{hotspot.targetAnchor.url}}" class="img-responsive img-thumbnail">
 						</div>
-
 					</div>
 
-					<div>
+					<div style="margin-top: 10px;">
 						<button type="button" class="btn btn-danger btn-sm btn-block" ng-click="removeHotspot($index)">
 							<span class="glyphicon glyphicon-trash"></span> Remove
 						</button>
-					</div>					
+					</div>
+
 				</div>		 
 			</accordion-group>
 			
