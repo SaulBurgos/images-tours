@@ -58,8 +58,8 @@
 #toursCreator .toursCreator-hotspot {
   position: absolute;
   border-radius: 6px;
-  min-width: 50px;
-  min-height: 50px;
+  min-width: 30px;
+  min-height: 30px;
 }
 
 #toursCreator .toursCreator-hotspot:hover {
@@ -80,8 +80,8 @@
 	height: 100%;
 	width: 100%;
 	opacity: 0.6;
-	min-width: 50px;
-	min-height: 50px;
+	min-width: 30px;
+	min-height: 30px;
 }
 
 .toursCreator-hotspot-anchor .toursCreator-hotspot-inner {
@@ -310,8 +310,8 @@
 }
 
 .hot-spot {
-	width: 20px;
-	height: 20px;
+	width: 70%;
+	height: 70%;
 	background-color: #D29A4E;
 	border-radius: 50%;
 	position: absolute;
@@ -329,11 +329,11 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	border: 2px solid #D29A4E;	
+	border: 2px solid #D29A4E;
 	border-radius: 50%;
 	transition: 0.2s all;
-	width: 28px;
-	height: 28px;
+	width: 130%;
+	height: 130%;
 	opacity: 1;
 }
    
