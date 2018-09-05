@@ -126,6 +126,7 @@ angular.module('myApp.controllers', [])
 			info.forEach(function(element,index) {
 				document.querySelector('.imagePreviewContainer').appendChild(element.image);
 				$scope.scenes.push({
+					id: new Date().getTime(),
 					name: 'scene' + (index + 1),
 					image: element.image,
 					url: element.data

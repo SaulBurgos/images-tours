@@ -33,27 +33,34 @@ angular.module('toursModule', [])
 			   var firstLink = document.getElementsByTagName('link')[0];
 			   firstLink.parentNode.insertBefore(jquiStyle, firstLink);
 
-				var parent = angular.element('#toursCreator .toursCreator-arrange');
+				if(scope.scenes.length > 0) {
+					scope.currentScene = scope.scenes[0];
+				}
+				scope.loadScene();
+			};
 
-				scope.$watch('currentScene.url', function(newValue, oldValue) {
-					parent.removeAttr('style');
-					var sceneBackground = jQuery('.toursCreator-image');
+			scope.loadScene = function() {				
+				if(typeof scope.currentScene.url === 'undefined') {
+					return;					
+				}
 
-					if(typeof scope.currentScene.url != 'undefined') {
-						scope.loadingScene = true;
-					}
-				
-					jQuery('.toursCreator-arrange').css({
-            		'height': '100%',
-            		'width': '100%'
-					});
-					  
-					jQuery(imageSceneSelector).removeClass('responsiveImage--portrait responsiveImage--landscape');
-            	jQuery(imageSceneSelector).load(scope.loadImageSuccess).error(function() {
-					   sceneBackground.attr('src','http://placehold.it/200x200&text=No+Image');
-					}).attr('src', newValue);
+				angular.element('#toursCreator .toursCreator-arrange').removeAttr('style');
+				var sceneBackground = jQuery('.toursCreator-image');
 
+				if(typeof scope.currentScene.url != 'undefined') {
+					scope.loadingScene = true;
+				}
+			
+				jQuery('.toursCreator-arrange').css({
+					'height': '100%',
+					'width': '100%'
 				});
+					
+				jQuery(imageSceneSelector).removeClass('responsiveImage--portrait responsiveImage--landscape');
+				jQuery(imageSceneSelector).load(scope.loadImageSuccess).error(function() {
+					sceneBackground.attr('src','http://placehold.it/200x200&text=No+Image');
+				}).attr('src', scope.currentScene.url);
+				
 			};
 
 			scope.loadImageSuccess = _.debounce(function () {				
@@ -112,6 +119,30 @@ angular.module('toursModule', [])
 						open: false						
 					});
 				}
+			};
+
+			scope.clickOnHotspot = function(currentHotspot,index) {
+				
+				if(currentHotspot.type == 'anchor') {
+					scope.loadingScene = true;
+
+					_.each(scope.scenes,function(element,index){
+						if(element.id == currentHotspot.targetAnchor.id) {
+							scope.changeScene(element.id);
+						}
+					});
+				} else {
+					
+				}
+			};
+
+			scope.changeScene = function (id) {
+				_.each(scope.scenes,function(element, index ) {
+					if(element.id == id) {										
+						scope.currentScene = element;
+					} 
+				});
+				scope.loadScene();				
 			};
 
       	scope.setUpHotspot = function(hotspot) {
