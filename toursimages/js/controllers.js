@@ -42,6 +42,15 @@ angular.module('myApp.controllers', [])
 
 	$scope.scenes = [];
 
+	function guid() {
+		function s4() {
+		  return Math.floor((1 + Math.random()) * 0x10000)
+			 .toString(16)
+			 .substring(1);
+		}
+		return s4() + s4();
+	}
+
 	$scope.goToStep = function(stepToGo) {
 
 		switch (stepToGo) {
@@ -126,7 +135,7 @@ angular.module('myApp.controllers', [])
 			info.forEach(function(element,index) {
 				document.querySelector('.imagePreviewContainer').appendChild(element.image);
 				$scope.scenes.push({
-					id: new Date().getTime(),
+					id: _.uniqueId(guid() + '-'),
 					name: 'scene' + (index + 1),
 					image: element.image,
 					url: element.data

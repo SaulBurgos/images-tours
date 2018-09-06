@@ -37,6 +37,47 @@ angular.module('toursModule', [])
 					scope.currentScene = scope.scenes[0];
 				}
 				scope.loadScene();
+				scope.listenEvents();
+			};
+
+			scope.listenEvents = function() {
+
+				var dragginOnProcess = false;
+				var debounceTap = _.debounce(function(event) {
+
+					if(!dragginOnProcess) {
+						console.log('normal click');
+					}
+
+				},300);
+
+				var debounceUnlockDrag = _.debounce(function() {
+					dragginOnProcess = false;					
+				}, 120);
+
+				jQuery('body').on("touchstart click", ".js-hotspot", function (event) {
+					event.preventDefault();
+					debounceTap(event);
+				});
+	
+				jQuery('body').on("touchmove",".js-hotspot",function (event) {
+					event.preventDefault();
+					dragginOnProcess = true;				
+				});	
+				
+				jQuery('body').on("touchend touchcancel dragend", ".js-hotspot",function (event) {
+					event.preventDefault();
+					debounceUnlockDrag();
+				});				
+			}
+
+			scope.changeScene = function (id) {				
+				var found = scope.scenes.find(function(element){ return element.id == id });
+
+				if(found) {
+					scope.currentScene = found;
+				}
+				scope.loadScene();				
 			};
 
 			scope.loadScene = function() {				
@@ -136,14 +177,7 @@ angular.module('toursModule', [])
 				}
 			};
 
-			scope.changeScene = function (id) {
-				_.each(scope.scenes,function(element, index ) {
-					if(element.id == id) {										
-						scope.currentScene = element;
-					} 
-				});
-				scope.loadScene();				
-			};
+			
 
       	scope.setUpHotspot = function(hotspot) {
 	 			angular.element('#toursCreator .toursCreator-hotspot').each(function( index ) {
