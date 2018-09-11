@@ -108,7 +108,7 @@
 
 					<!-- <div class="toursCreator-hotspot-inner"></div> -->
 					<span class="tours-index">{{ $index + 1 }}</span>
-					<div class="hot-spot js-hotspot" ng-click="clickOnHotspot(hotspot,$index);"></div>
+					<div class="hot-spot js-hotspot" data-id="{{ hotspot.id }}" data-index="{{ $index }}"></div>
 				</div>
 	
 				<img id="loadingScene" src="img/ajax-loader.gif"  ng-show="loadingScene">

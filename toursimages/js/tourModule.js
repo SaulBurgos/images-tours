@@ -3,7 +3,7 @@
 /* Directives */
 angular.module('toursModule', [])
 
-.directive('toursCreator', function() {
+.directive('toursCreator', function($timeout) {
 	// Runs during compile
 	return {
 		scope: {
@@ -43,10 +43,10 @@ angular.module('toursModule', [])
 			scope.listenEvents = function() {
 
 				var dragginOnProcess = false;
-				var debounceTap = _.debounce(function(event) {
+				var debounceTap = _.debounce(function(event,elHtml) {
 
-					if(!dragginOnProcess) {
-						console.log('normal click');
+					if(!dragginOnProcess) {						
+						scope.clickOnHotspot(scope.currentScene.hotspots[jQuery(elHtml).attr('data-index')],jQuery(elHtml).attr('data-index'));
 					}
 
 				},300);
@@ -57,7 +57,7 @@ angular.module('toursModule', [])
 
 				jQuery('body').on("touchstart click", ".js-hotspot", function (event) {
 					event.preventDefault();
-					debounceTap(event);
+					debounceTap(event,this);
 				});
 	
 				jQuery('body').on("touchmove",".js-hotspot",function (event) {
@@ -69,7 +69,22 @@ angular.module('toursModule', [])
 					event.preventDefault();
 					debounceUnlockDrag();
 				});				
-			}
+			};
+
+			scope.clickOnHotspot = function(currentHotspot,index) {
+				
+				if(currentHotspot.type == 'anchor') {
+					scope.loadingScene = true;
+
+					_.each(scope.scenes,function(element,index){
+						if(element.id == currentHotspot.targetAnchor.id) {
+							scope.changeScene(element.id);
+						}
+					});
+				} else {
+					
+				}
+			};
 
 			scope.changeScene = function (id) {				
 				var found = scope.scenes.find(function(element){ return element.id == id });
@@ -160,24 +175,7 @@ angular.module('toursModule', [])
 						open: false						
 					});
 				}
-			};
-
-			scope.clickOnHotspot = function(currentHotspot,index) {
-				
-				if(currentHotspot.type == 'anchor') {
-					scope.loadingScene = true;
-
-					_.each(scope.scenes,function(element,index){
-						if(element.id == currentHotspot.targetAnchor.id) {
-							scope.changeScene(element.id);
-						}
-					});
-				} else {
-					
-				}
-			};
-
-			
+			};			
 
       	scope.setUpHotspot = function(hotspot) {
 	 			angular.element('#toursCreator .toursCreator-hotspot').each(function( index ) {
