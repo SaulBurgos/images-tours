@@ -172,7 +172,13 @@ angular.module('toursModule', [])
 						type: scope.typeAreaSelected,
 						targetAnchor: '',
 						position: scope.getRandomPosition(),
-						open: false						
+						open: false,
+						color: (scope.typeAreaSelected == 'anchor') ? '#F8D800' : '#0396FF',
+						getStyle: function() {
+							return {
+								'background-color': this.color
+							}
+						}
 					});
 				}
 			};			

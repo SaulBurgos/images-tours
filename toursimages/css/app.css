@@ -311,6 +311,11 @@
   max-width: 100%;
 }
 
+
+@keyframes blinker {  
+	50% { opacity: 0.2; }
+}
+
 .hot-spot {
 	width: 70%;
 	height: 70%;
@@ -321,11 +326,12 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1;
-	opacity: 0.6;
+	opacity: 1;
 	z-index: 1;
+	animation: blinker 2s infinite ease-in-out;
 }
   
-.hot-spot:after {
+/* .hot-spot:after {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -337,7 +343,7 @@
 	width: 130%;
 	height: 130%;
 	opacity: 0.6;
-}
+} */
    
 .hot-spot:hover {
 	cursor: pointer;
@@ -345,11 +351,13 @@
 }
 
 .toursCreator-hotspot-anchor .hot-spot {
-	background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);
+	/* background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%); */
+	background-color: #F8D800;
 }	
 
 .toursCreator-hotspot-action .hot-spot {	
-	background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);	
+	/* background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);	 */
+	background-color: #0396FF;
 }
 
 .toursCreator-hotspot-anchor .hot-spot:after {

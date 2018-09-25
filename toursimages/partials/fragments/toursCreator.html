@@ -57,9 +57,11 @@
 					<div class="row" style="margin-top:10px;">
 						<div class="col-xs-12" >
 							<div>
-								<input type="color" id="hotspotColor{{ hotspot.id }}" name="color" 
-									value="#e66465" />
-								<label for="hotspotColor{{ hotspot.id }}">Color</label>
+								<input type="color" id="hotspotColor{{ hotspot.id }}" name="color{{ hotspot.id }}" 
+									value="#F8D800" ng-model="hotspot.color" />
+								<label for="hotspotColor{{ hotspot.id }}">
+									Color 
+								</label>
 							</div>
 						</div>
 					</div>
@@ -118,7 +120,7 @@
 
 					<!-- <div class="toursCreator-hotspot-inner"></div> -->
 					<span class="tours-index">{{ $index + 1 }}</span>
-					<div class="hot-spot js-hotspot" data-id="{{ hotspot.id }}" data-index="{{ $index }}"></div>
+					<div class="hot-spot js-hotspot" data-id="{{ hotspot.id }}" data-index="{{ $index }}" ng-style="hotspot.getStyle()"></div>
 				</div>
 	
 				<img id="loadingScene" src="img/ajax-loader.gif"  ng-show="loadingScene">
