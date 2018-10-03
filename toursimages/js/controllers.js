@@ -57,38 +57,38 @@ angular.module('myApp.controllers', [])
 			case 1:
 				$scope.steps.step1.show = true;
 				$scope.steps.step2.show = false;
-				$scope.steps.step2.show = false;
+				$scope.steps.step3.show = false;
 				break;
 			case 2:
 				$scope.steps.step1.show = false;
 				$scope.steps.step2.show = true;
-				$scope.steps.step2.show = true;
+				$scope.steps.step3.show = false;
 				break;
 
 			case 3:
 				$scope.steps.step1.show = false;
-				$scope.steps.step2.show = true;
-				$scope.steps.step2.show = true;
+				$scope.steps.step2.show = false;
+				$scope.steps.step3.show = true;
 				break;
 		}
-
 	};
 
-	// $scope.scenes = [
-	// 	{name: 'scene 1',url:'http://saulburgos.com/apps/toursimages/img/tours-1.jpg'},
-	// 	{name: 'scene 2',url:'http://saulburgos.com/apps/toursimages/img/tours-2.jpg'},
-	// 	{name: 'scene 3',url:'http://saulburgos.com/apps/toursimages/img/tours-3.jpg'},
-	// 	{name: 'scene 4',url:'http://saulburgos.com/apps/toursimages/img/tours-4.jpg'},
-	// 	{name: 'scene 5',url:'http://saulburgos.com/apps/toursimages/img/tours-5.jpg'},
-	// 	{name: 'scene 6',url:'http://saulburgos.com/apps/toursimages/img/tours-6.jpg'},
-	// 	{name: 'scene 7',url:'http://saulburgos.com/apps/toursimages/img/tours-7.jpg'},
-	// 	{name: 'scene 8',url:'http://saulburgos.com/apps/toursimages/img/tours-8.jpg'},
-	// 	{name: 'scene 9',url:'http://saulburgos.com/apps/toursimages/img/tours-9.jpg'}
-	// ];
 
+	$scope.serialize = function() {
+		//$scope.finalObject = angular.toJson($scope.scenes);
+		var scenes = [];
+		$scope.scenes.forEach(function(currentScene) {
 
-	$scope.showJson = function() {
-		$scope.finalObject = angular.toJson($scope.scenes);
+			scenes.push({
+				id: currentScene.id,
+				name: currentScene.name,
+				imageSrc: currentScene.fileName,
+				hotspots: []
+			});			
+		});
+
+		console.log(scenes);
+		$scope.finalObject = scenes;
 	};	
 
 	function readImageFile (file) {
@@ -104,7 +104,8 @@ angular.module('myApp.controllers', [])
 			img.onload = function() {               
 				defer.resolve({
 					image: this,
-					data: fileReader.result
+					data: fileReader.result,
+					fileName: file.name
 				});
 			};
 			img.src = fileReader.result;
@@ -123,7 +124,6 @@ angular.module('myApp.controllers', [])
       if (filesSelected.length > 0) {
 
 			_.each(filesSelected,function(currentFile) {
-
 				imagesPromises.push(readImageFile(currentFile));
 			});
 		}
@@ -138,6 +138,7 @@ angular.module('myApp.controllers', [])
 					id: _.uniqueId(guid() + '-'),
 					name: 'scene' + (index + 1),
 					image: element.image,
+					fileName: element.fileName,
 					url: element.data
 				});
 			});			
