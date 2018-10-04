@@ -73,18 +73,28 @@ angular.module('myApp.controllers', [])
 		}
 	};
 
-
+	//https://coderwall.com/p/ostduq/escape-html-with-javascript
 	$scope.serialize = function() {
 		//$scope.finalObject = angular.toJson($scope.scenes);
 		var scenes = [];
 		$scope.scenes.forEach(function(currentScene) {
 
-			scenes.push({
+			var newScene = {
 				id: currentScene.id,
-				name: currentScene.name,
+				name: _.escape(currentScene.name),
 				imageSrc: currentScene.fileName,
 				hotspots: []
-			});			
+			};
+
+			if(currentScene.hotspots) {
+				currentScene.hotspots.forEach(function(currentHotspot) {
+					var newHotspot = _.omit(currentHotspot,['$$hashKey','getStyle','open','sceneId']);
+					newHotspot.targetAnchor = _.pick(newHotspot.targetAnchor,'id');
+					newScene.hotspots.push(newHotspot);
+				});
+			}
+
+			scenes.push(newScene);			
 		});
 
 		console.log(scenes);
