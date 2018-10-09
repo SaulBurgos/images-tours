@@ -89,7 +89,11 @@ angular.module('myApp.controllers', [])
 			if(currentScene.hotspots) {
 				currentScene.hotspots.forEach(function(currentHotspot) {
 					var newHotspot = _.omit(currentHotspot,['$$hashKey','getStyle','open','sceneId']);
-					newHotspot.targetAnchor = _.pick(newHotspot.targetAnchor,'id');
+
+					if(_.isObject(newHotspot.targetAnchor)) {
+						newHotspot.targetAnchor = _.pick(newHotspot.targetAnchor,'id');
+					}
+					
 					newScene.hotspots.push(newHotspot);
 				});
 			}
@@ -98,8 +102,18 @@ angular.module('myApp.controllers', [])
 		});
 
 		console.log(scenes);
-		$scope.finalObject = scenes;
+		$scope.finalObject = angular.toJson(scenes);		
 	};	
+
+	$scope.downloadObjectAsJson = function() {
+		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify($scope.finalObject));
+		var downloadAnchorNode = document.createElement('a');
+		downloadAnchorNode.setAttribute("href",     dataStr);
+		downloadAnchorNode.setAttribute("download", "tourData.json");
+		document.body.appendChild(downloadAnchorNode); // required for firefox
+		downloadAnchorNode.click();
+		downloadAnchorNode.remove();
+	}
 
 	function readImageFile (file) {
 		var defer = $q.defer();
