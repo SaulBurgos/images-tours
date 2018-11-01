@@ -174,7 +174,10 @@ angular.module('toursModule', [])
 						position: scope.getRandomPosition(),
 						open: false,
 						color: (scope.typeAreaSelected == 'anchor') ? '#F8D800' : '#0396FF',
-						getStyle: function() {
+						getStyle: function() {							
+							//because with css don't work
+							jQuery('.js-' + this.id + ' .panel-heading').attr('style', 'background-color: ' + this.color + ' !important');							
+
 							return {
 								'background-color': this.color
 							}

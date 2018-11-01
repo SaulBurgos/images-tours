@@ -173,11 +173,11 @@
 }
 
 .toursCreator-listHotspots-anchor >.panel-heading {
-	background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);
+	background-color: #F8D800 !important;
 }
 
 .toursCreator-listHotspots-action >.panel-heading {
-	background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+	background-color: #0396FF !important;
 }
 
 

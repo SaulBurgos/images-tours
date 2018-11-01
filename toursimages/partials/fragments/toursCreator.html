@@ -28,7 +28,7 @@
 		
 		<accordion close-others="oneAtATime" class="toursCreator-listHotspots">
 
-			<accordion-group is-open="hotspot.open" ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-listHotspots-{{hotspot.type}}">
+			<accordion-group is-open="hotspot.open" ng-repeat="hotspot in currentScene.hotspots" class="toursCreator-listHotspots-{{hotspot.type}} js-{{ hotspot.id }}">
 				<accordion-heading>
 					{{ $index + 1 }} - {{ hotspot.type }}
 					<i class="pull-right glyphicon" 
@@ -57,8 +57,7 @@
 					<div class="row" style="margin-top:10px;">
 						<div class="col-xs-12" >
 							<div>
-								<input type="color" id="hotspotColor{{ hotspot.id }}" name="color{{ hotspot.id }}" 
-									value="#F8D800" ng-model="hotspot.color" />
+								<input type="color" id="hotspotColor{{ hotspot.id }}" name="color{{ hotspot.id }}" value="#F8D800" ng-model="hotspot.color" />
 								<label for="hotspotColor{{ hotspot.id }}">
 									Color 
 								</label>
